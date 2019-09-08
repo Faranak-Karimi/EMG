@@ -44,7 +44,7 @@ public:
         SPI.transfer(0x03);
         SPI.transfer(0x00);
         for(uint8_t i=0; i<32; i++) {
-            data[i] = SPI.transfer(0);
+            data[i] = SPI.transfer(0)>>1;
         }
         _pulseSS();
     }
@@ -91,17 +91,31 @@ void send(const char * message)
     Serial.println();
 }
 
+
+uint8_t data [9] {1,2,3,4,5,6,7,8,9};
+size_t len = 9;
 void setup()
 {
     Serial.begin(115200);
     SPI.begin();
-    esp.begin();
+    SPI.beginTransaction(SPISettings(1000000,MSBFIRST, SPI_MODE1));
+    esp.begin();           
     delay(1000);
-    send("Hello Slave!");
+    //send("Hello Slave!");
 }
-
 void loop()
 {
-    delay(1000);
-    send("Are you alive?");
+    ///delay(1000);
+   // send("Are you alive?");
+    uint8_t i=0;
+      
+        SPI.transfer(0x02);
+        SPI.transfer(0x00);
+        while(len-- && i < 32) {
+            SPI.transfer(data[i++]);
+        }
+        while(i++ < 32) {
+            SPI.transfer(0);
+        }
+   
 }
