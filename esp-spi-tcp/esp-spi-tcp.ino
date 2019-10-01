@@ -1,9 +1,9 @@
 #include <ESP8266WiFi.h>
- #include <SPI.h>
+// #include <SPI.h>
  #include "SPISlave.h"
-uint8_t buff [50];
+ uint8_t buff[32] ;
 volatile byte indx;
-volatile boolean process;
+volatile boolean process = false;
 
 const char* ssid = "Ap";
 const char* password =  "*srl*780#";
@@ -15,47 +15,62 @@ const char * host = "192.168.43.42";
 void setup()
 {
   
- 
+     SPISlave.begin();
+   SPI1C2 |= 1 << SPIC2MISODM_S;
+
   Serial.begin(115200);
-  WiFi.mode(WIFI_STA);
+ /* WiFi.mode(WIFI_STA);
   WiFi.begin(ssid, password);
   while (WiFi.status() != WL_CONNECTED) {
     delay(500);
     Serial.println("...");
   }
-
-     Serial.begin (115200);
+*/
+  /*   Serial.begin (115200);
  //  SPI.setDataMode(SPI_MODE3);
    //pinMode(MISO, OUTPUT); // have to send on master in so it set as output
  //  SPCR |= _BV(SPE); // turn on SPI in slave mode
-   indx = 0; // buffer empty
-   process = false;
+  // indx = 0; // buffer empty
+  // process = false;
   // SPI.attachInterrupt(); // turn on interrupt
  
-  Serial.print("WiFi connected with IP: ");
-  Serial.println(WiFi.localIP());
+ // Serial.print("WiFi connected with IP: ");
+  //Serial.println(WiFi.localIP());*/
 
+ // buff = data;
+      process = true; //reset the process
 
+//if (process) {
+//     Serial.println (data); //print the array on serial monitor
+  //     tcpclient.write(data, sizeof(data));
+    // indx= 0; //reset button to zero
+  // }
+ 
      SPISlave.onData([](uint8_t * data, size_t len)  {
+      indx = 0;
+      Serial.println("on Data...");
+      Serial.println(len);
+      Serial.print("data0 : ");
+      Serial.println(data[0]);
+      Serial.print("data 1 : ");
+       Serial.println(data[1]);
+      Serial.print("data 2 : ");
+       Serial.println(data[2]);
+      Serial.print("data 3 : ");
+       Serial.println(data[3]);
  while (indx < len) {
       buff [indx++] = data[indx++]; // save data in the next index in the array buff
  }
-//if (process) {
-    process = true; //reset the process
-//     Serial.println (data); //print the array on serial monitor
-  //     tcpclient.write(data, sizeof(data));
-     indx= 0; //reset button to zero
-  // }
- 
 
     });
        
 
-    SPISlave.begin();
-   SPI1C2 |= 1 << SPIC2MISODM_S;
 
  
 }
+
+
+
 /*
 ISR (SPI_STC_vect) // SPI interrupt routine 
 { 
@@ -72,7 +87,7 @@ ISR (SPI_STC_vect) // SPI interrupt routine
 void loop()
 {
    
-  WiFiClient tcpclient;
+/*  WiFiClient tcpclient;
 unsigned int ret = tcpclient.connect(host, port);
     if (!ret) {
  
@@ -97,15 +112,27 @@ else if (ret) {
   };
 */
 if (process) {
+ // indx = 0;
+    Serial.println("i'm in process");
     process = false; //reset the process
-      //Serial.println (data); //print the array on serial monitor
-       tcpclient.write(buff, sizeof(buff));
+   // uint8_t dbuf[32];
+ //   memcpy(dbuf, buff, 32);
+   /* for (int i=0; i<32; i++)
+    {
+       Serial.println (dbuf[i]); //print the array on serial monitor
+      
+      }*/
+      
+      Serial.println (buff[0]); //print the array on serial monitor
+
+      
+    //   tcpclient.write(dbuf,sizeof(dbuf));
      // indx= 0; //reset button to zero
   }
 
-}
-    tcpclient.stop();
- 
-    delay(10000);
+//}
+//    tcpclient.stop();
+
+    delay(4000);
    
 }
