@@ -38,7 +38,7 @@ void setup()
   //Serial.println(WiFi.localIP());*/
 
  // buff = data;
-      process = true; //reset the process
+//      process = true; //reset the process
 
 //if (process) {
 //     Serial.println (data); //print the array on serial monitor
@@ -50,20 +50,20 @@ void setup()
       indx = 0;
       Serial.println("on Data...");
       Serial.println(len);
-      Serial.print("data0 : ");
-      Serial.println(data[0]);
-      Serial.print("data 1 : ");
-       Serial.println(data[1]);
-      Serial.print("data 2 : ");
-       Serial.println(data[2]);
-      Serial.print("data 3 : ");
-       Serial.println(data[3]);
+
  while (indx < len) {
       buff [indx++] = data[indx++]; // save data in the next index in the array buff
- }
+      Serial.print(data[indx]);
+      Serial.print(" ==? ");
+      Serial.print(buff[indx]);
+      }
+            Serial.println("leaving onData")  ;    
+
+ 
+        process = true;
+
 
     });
-       
 
 
  
@@ -122,17 +122,20 @@ if (process) {
        Serial.println (dbuf[i]); //print the array on serial monitor
       
       }*/
-      
-      Serial.println (buff[0]); //print the array on serial monitor
-
-      
+      for(int i = 0; i < 32; i++){
+      Serial.print (buff[i]); //print the array on serial monitor
+      Serial.print(" , ");
+      }
+      Serial.println("done");
+     
     //   tcpclient.write(dbuf,sizeof(dbuf));
      // indx= 0; //reset button to zero
-  }
+     }
+     
 
 //}
 //    tcpclient.stop();
 
-    delay(4000);
+   // delay(4000);
    
 }

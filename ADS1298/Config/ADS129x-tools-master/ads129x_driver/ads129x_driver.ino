@@ -775,12 +775,7 @@ void arduino_setup() {
     digitalWrite(IPIN_RESET, HIGH);
     delay(1000);// *optional
     digitalWrite(IPIN_RESET, LOW);
-    delay(1);// *optional
+    delay(1);// *optionalf
     digitalWrite(IPIN_RESET, HIGH);
     delay(1);  // *optional Wait for 18 tCLKs AKA 9 microseconds, we use 1 millisecond
 } 
-
-
-
-
-
