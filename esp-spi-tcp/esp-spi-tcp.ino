@@ -11,98 +11,63 @@ const char* password =  "*srl*780#";
 const uint16_t port = 8090;
 const char * host = "192.168.43.42";
 
+WiFiClient tcpclient;
+ 
+void tcpconnection(const uint16_t port, const char* host)
+{
+
+unsigned int ret = tcpclient.connect(host, port);
+    if (!ret) {
+       // while(!tcpclient.connect(host, port)){
+        Serial.println("Connection to host failed");
+ 
+       // delay(1000);
+        return;
+       // }
+    }
+ 
+ 
+else if (ret) {
+   Serial.println("Connected to server successfuly!");
+    tcpclient.print("Hello from ESP8266!");
+}
+}
+
 
 void setup()
 {
-  
-     SPISlave.begin();
-   SPI1C2 |= 1 << SPIC2MISODM_S;
+   Serial.begin(115200);
 
-  Serial.begin(115200);
- /* WiFi.mode(WIFI_STA);
+
+    WiFi.mode(WIFI_STA);
   WiFi.begin(ssid, password);
   while (WiFi.status() != WL_CONNECTED) {
     delay(500);
     Serial.println("...");
-  }
-*/
-  /*   Serial.begin (115200);
- //  SPI.setDataMode(SPI_MODE3);
-   //pinMode(MISO, OUTPUT); // have to send on master in so it set as output
- //  SPCR |= _BV(SPE); // turn on SPI in slave mode
-  // indx = 0; // buffer empty
-  // process = false;
-  // SPI.attachInterrupt(); // turn on interrupt
+ }
+  
+   Serial.print("WiFi connected with IP: ");
+   Serial.println(WiFi.localIP());
+   SPISlave.begin();
+  // SPI1C2 |= 1 << SPIC2MISODM_S;
+
  
- // Serial.print("WiFi connected with IP: ");
-  //Serial.println(WiFi.localIP());*/
-
- // buff = data;
-//      process = true; //reset the process
-
-//if (process) {
-//     Serial.println (data); //print the array on serial monitor
-  //     tcpclient.write(data, sizeof(data));
-    // indx= 0; //reset button to zero
-  // }
- 
-     SPISlave.onData([](uint8_t * data, size_t len)  {
-      indx = 0;
-      Serial.println("on Data...");
-      Serial.println(len);
-
- while (indx < len) {
-      buff [indx++] = data[indx++]; // save data in the next index in the array buff
-      Serial.print(data[indx]);
-      Serial.print(" ==? ");
-      Serial.print(buff[indx]);
+  
+ SPISlave.onData([](uint8_t * data, size_t len)  {
+  
+ for(int i=0; i<32;i++) {
+      buff [i] = data[i]; // save data in the next index in the array buff
+   
       }
-            Serial.println("leaving onData")  ;    
-
- 
         process = true;
-
-
     });
 
-
- 
+tcpconnection(port, host);
 }
 
-
-
-/*
-ISR (SPI_STC_vect) // SPI interrupt routine 
-{ 
-   byte c = SPDR; // read byte from SPI Data Register
-   if (indx < sizeof buff) {
-      buff [indx++] = c; // save data in the next index in the array buff
-   }
-     else
-     {
-      process = true;
-   }
-}
- */
 void loop()
 {
    
-/*  WiFiClient tcpclient;
-unsigned int ret = tcpclient.connect(host, port);
-    if (!ret) {
- 
-        Serial.println("Connection to host failed");
- 
-        delay(1000);
-        return;
-    }
- 
-   
-else if (ret) {
-   Serial.println("Connected to server successful!");
- 
-  //  tcpclient.print("Hello from ESP8266!");
-    
  /* const unsigned char data[] = {
     0xA1, 0xB2, 0xC3, 0x0E,
     0x05, 0x06, 0x07, 0x08,
@@ -111,31 +76,37 @@ else if (ret) {
     0x17
   };
 */
+if (tcpclient.connected())
+{
 if (process) {
- // indx = 0;
-    Serial.println("i'm in process");
-    process = false; //reset the process
+
+   process = false; //reset the process
+ /*
+   // Serial.println("i'm in process");
+  
    // uint8_t dbuf[32];
- //   memcpy(dbuf, buff, 32);
-   /* for (int i=0; i<32; i++)
-    {
-       Serial.println (dbuf[i]); //print the array on serial monitor
-      
-      }*/
-      for(int i = 0; i < 32; i++){
+ //   memcpy(dbuf, buff, 32);*/
+
+    for(int i = 0; i < 32; i++){
       Serial.print (buff[i]); //print the array on serial monitor
       Serial.print(" , ");
       }
+      
       Serial.println("done");
      
-    //   tcpclient.write(dbuf,sizeof(dbuf));
-     // indx= 0; //reset button to zero
+    tcpclient.write(buff,sizeof(buff));
+     
      }
      
-
-//}
-//    tcpclient.stop();
-
-   // delay(4000);
-   
 }
+
+else
+{
+  tcpconnection(port, host);
+}
+
+  //tcpclient.stop();
+
+   // delay(500);
+}
+   
