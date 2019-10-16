@@ -1,7 +1,11 @@
 #include <ESP8266WiFi.h>
 // #include <SPI.h>
  #include "SPISlave.h"
- uint8_t buff[32] ;
+// int buffsize = 32;
+ size_t kb_cnt = 0;
+ size_t Mb_cnt = 0;
+ uint8_t buff[256] ;
+ 
 volatile byte indx;
 volatile boolean process = false;
 
@@ -21,13 +25,14 @@ unsigned int ret = tcpclient.connect(host, port);
        // while(!tcpclient.connect(host, port)){
         Serial.println("Connection to host failed");
  
-       // delay(1000);
+        delay(1000);
         return;
        // }
     }
  
  
 else if (ret) {
+  // tcpclient.setNoDelay(1);
    Serial.println("Connected to server successfuly!");
     tcpclient.print("Hello from ESP8266!");
 }
@@ -54,13 +59,21 @@ void setup()
  
   
  SPISlave.onData([](uint8_t * data, size_t len)  {
-  
+
+//  Serial.print(len);
  for(int i=0; i<32;i++) {
-      buff [i] = data[i]; // save data in the next index in the array buff
-   
-      }
+      
+      buff [kb_cnt++] = data[i]; // save data in the next index in the array buff
+      if(kb_cnt == 256)
+      {
+        kb_cnt = 0;
+   //     Mb_cnt += 1;
         process = true;
+      }
+      }
+      
     });
+
 
 tcpconnection(port, host);
 }
@@ -87,7 +100,7 @@ if (process) {
    // uint8_t dbuf[32];
  //   memcpy(dbuf, buff, 32);*/
 
-    for(int i = 0; i < 32; i++){
+   for(int i = 0; i < 256; i++){
       Serial.print (buff[i]); //print the array on serial monitor
       Serial.print(" , ");
       }
