@@ -82,8 +82,8 @@ void SPISlaveClass::end()
 }
 void SPISlaveClass::setData(uint8_t * data, size_t len)
 {
-    if(len > 32) {
-        len = 32;
+    if(len > 50) {
+        len = 50;
     }
     hspi_slave_setData(data, len);
 }

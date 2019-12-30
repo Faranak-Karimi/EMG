@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f66864ce-c62f-49a0-9fbe-2f122d991d41" name="Default Changelist" comment="data manipulation">
+<<<<<<< Updated upstream
       <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../ADS1298/ADS_Internal_TestSignal_8channel_ArduinoDue/ads1298.h" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../ADS1298/ADS_Internal_TestSignal_8channel_ArduinoDue/adsCMD.cpp" beforeDir="false" />
@@ -16,6 +17,21 @@
       <change beforePath="$PROJECT_DIR$/../STM32F103C8T6/Keil Code/SPI_mast.uvprojx" beforeDir="false" afterPath="$PROJECT_DIR$/../STM32F103C8T6/Keil Code/SPI_mast.uvprojx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../ardslave/ardslave.ino" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../esp-spi-tcp/esp-spi-tcp.ino" beforeDir="false" afterPath="$PROJECT_DIR$/../esp-spi-tcp/esp-spi-tcp.ino" afterDir="false" />
+=======
+      <change afterPath="$PROJECT_DIR$/../Python-GUI.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../SPI/SPI/SPI.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../SPI/SPI/SPI.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../STM32F103C8T6/Keil Code/DebugConfig/pleasssssse_STM32F103C8_1.0.0.dbgconf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../STM32F103C8T6/Keil Code/RTE/_pleasssssse/RTE_Components.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../STM32F103C8T6/Keil Code/SPI_mast.uvguix.Vida" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../STM32F103C8T6/Keil Code/SPI_mast.uvoptx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SPI/ArduinoSPIMaster/ArduinoSPIMaster.ino" beforeDir="false" afterPath="$PROJECT_DIR$/../SPI/ArduinoSPIMaster/ArduinoSPIMaster.ino" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SPI/SPIMaster/SPIMaster.ino" beforeDir="false" afterPath="$PROJECT_DIR$/../SPI/SPIMaster/SPIMaster.ino" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SPI/SPISlave/SPISlave_Test/SPISlave.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../SPI/SPISlave/SPISlave_Test/SPISlave.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SPI/SPISlave/SPISlave_Test/SPISlave_Test.ino" beforeDir="false" afterPath="$PROJECT_DIR$/../SPI/SPISlave/SPISlave_Test/SPISlave_Test.ino" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../STM32F103C8T6/Keil Code/SPI_mast.uvprojx" beforeDir="false" afterPath="$PROJECT_DIR$/../STM32F103C8T6/Keil Code/SPI_mast.uvprojx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ardslave_due/ardslave_due.ino" beforeDir="false" afterPath="$PROJECT_DIR$/../ardslave_due/ardslave_due.ino" afterDir="false" />
+>>>>>>> Stashed changes
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />

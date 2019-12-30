@@ -110,12 +110,15 @@ void loop()
     uint8_t i=0;
       
         SPI.transfer(0x02);
+        delay(10);
+        
         SPI.transfer(0x00);
+        delay(10);
         while(len-- && i < 32) {
             SPI.transfer(data[i++]);
         }
-        while(i++ < 32) {
-            SPI.transfer(0);
-        }
+      //  while(i++ < 32) {
+        //    SPI.transfer(0);
+        //}
    
 }
