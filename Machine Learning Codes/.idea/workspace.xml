@@ -1,7 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f66864ce-c62f-49a0-9fbe-2f122d991d41" name="Default Changelist" comment="" />
+    <list default="true" id="f66864ce-c62f-49a0-9fbe-2f122d991d41" name="Default Changelist" comment="data manipulation">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ADS1298/ADS_Internal_TestSignal_8channel_ArduinoDue/ads1298.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ADS1298/ADS_Internal_TestSignal_8channel_ArduinoDue/adsCMD.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ADS1298/ADS_Internal_TestSignal_8channel_ArduinoDue/adsCMD.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ADS1298/ADS_Internal_TestSignal_8channel_ArduinoDue/main_ads1299_due_blue.ino" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ADS1298/Config/ADS129x-tools-master/ads1298_hello_world/adsCMD.h" beforeDir="false" afterPath="$PROJECT_DIR$/../ADS1298/Config/ADS129x-tools-master/ads1298_hello_world/adsCMD.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SVM.py" beforeDir="false" afterPath="$PROJECT_DIR$/SVM.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SPI/SPIMaster/SPIMaster.ino" beforeDir="false" afterPath="$PROJECT_DIR$/../SPI/SPIMaster/SPIMaster.ino" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SPI/SPISlave/SPISlave_Test/SPISlave_Test.ino" beforeDir="false" afterPath="$PROJECT_DIR$/../SPI/SPISlave/SPISlave_Test/SPISlave_Test.ino" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SPI/Safe_master_edited/Safe_master_edited.ino" beforeDir="false" afterPath="$PROJECT_DIR$/../SPI/Safe_master_edited/Safe_master_edited.ino" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../STM32F103C8T6/Keil Code/SPI_mast.uvprojx" beforeDir="false" afterPath="$PROJECT_DIR$/../STM32F103C8T6/Keil Code/SPI_mast.uvprojx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ardslave/ardslave.ino" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../esp-spi-tcp/esp-spi-tcp.ino" beforeDir="false" afterPath="$PROJECT_DIR$/../esp-spi-tcp/esp-spi-tcp.ino" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -15,8 +30,18 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="PREVIOUS_COMMIT_AUTHORS">
+      <list>
+        <option value="Franak" />
+      </list>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
   <component name="ProjectId" id="1UWAbFsBCdj6Ak4v3qPCBOlkn9Q" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
@@ -93,6 +118,7 @@
       <workItem from="1577609781811" duration="14629000" />
       <workItem from="1577644893931" duration="4716000" />
       <workItem from="1577690600852" duration="4956000" />
+      <workItem from="1577715124100" duration="1912000" />
     </task>
     <servers />
   </component>
@@ -101,6 +127,17 @@
   </component>
   <component name="UnknownFeatures">
     <option featureType="com.intellij.fileTypeFactory" implementationName="*.csv" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="data manipulation" />
