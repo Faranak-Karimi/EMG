@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="f66864ce-c62f-49a0-9fbe-2f122d991d41" name="Default Changelist" comment="data manipulation">
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
       <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../ADS1298/ADS_Internal_TestSignal_8channel_ArduinoDue/ads1298.h" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../ADS1298/ADS_Internal_TestSignal_8channel_ArduinoDue/adsCMD.cpp" beforeDir="false" />
@@ -18,6 +19,8 @@
       <change beforePath="$PROJECT_DIR$/../ardslave/ardslave.ino" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../esp-spi-tcp/esp-spi-tcp.ino" beforeDir="false" afterPath="$PROJECT_DIR$/../esp-spi-tcp/esp-spi-tcp.ino" afterDir="false" />
 =======
+=======
+>>>>>>> Stashed changes
       <change afterPath="$PROJECT_DIR$/../Python-GUI.py" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../SPI/SPI/SPI.cpp" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../SPI/SPI/SPI.h" afterDir="false" />
@@ -31,6 +34,9 @@
       <change beforePath="$PROJECT_DIR$/../SPI/SPISlave/SPISlave_Test/SPISlave_Test.ino" beforeDir="false" afterPath="$PROJECT_DIR$/../SPI/SPISlave/SPISlave_Test/SPISlave_Test.ino" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../STM32F103C8T6/Keil Code/SPI_mast.uvprojx" beforeDir="false" afterPath="$PROJECT_DIR$/../STM32F103C8T6/Keil Code/SPI_mast.uvprojx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../ardslave_due/ardslave_due.ino" beforeDir="false" afterPath="$PROJECT_DIR$/../ardslave_due/ardslave_due.ino" afterDir="false" />
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
