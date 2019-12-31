@@ -14,6 +14,13 @@
 */
 #include <SPI.h>
 
+size_t cnt = 0;
+#define SPI2_NSS_PIN PB12   //SPI_2 Chip Select pin is PB12. You can change it to the STM32 pin you want.
+#define SPI1_NSS_PIN PA15
+SPIClass SPI_2(2); //Create an instance of the SPI Class called SPI_2 that uses the 2nd SPI Port
+
+     uint8_t data2[32];
+
 class ESPSafeMaster {
   private:
     uint8_t _ss_pin;
@@ -49,25 +56,41 @@ class ESPSafeMaster {
 
     void readData(uint8_t * data) {
       _pulseSS();
-      SPI.transfer(0x03);
-      SPI.transfer(0x00);
-      for (uint8_t i = 0; i < 32; i++) {
+      for (uint8_t i = 0; i < 256; i++) {
+        if(i%32 == 0){
+          SPI.transfer(0x03);
+          SPI.transfer(0x00);
+        //  delayMicroseconds(5);
+          }
         data[i] = SPI.transfer(0);
       }
       _pulseSS();
     }
 
-    void writeData(const uint8_t * data, size_t len) {
-      uint8_t i = 0;
+    void writeData(const uint8_t * data, size_t len, size_t s) {
+      size_t i = 0;
+
+ //     Serial.println();
+//       Serial.write(data, len);
       _pulseSS();
-      SPI.transfer(0x02);
-      SPI.transfer(0x00);
+       SPI.transfer(0x02);
+       SPI.transfer(0x00);     
       while (len-- && i < 32) {
-        SPI.transfer(data[i++]);
+//        if(i%32 == 0){
+//      SPI.transfer(0x02);
+//      SPI.transfer(0x00);}
+        //Serial.print(data[i+s]);
+        SPI.transfer(data[s + i]);
+   //     delayMicroseconds(5);
+           i++;
+
+     //   Serial.print(" , ");
+//        Serial.println(i);
       }
       while (i++ < 32) {
         SPI.transfer(0);
       }
+      Serial.println();
       _pulseSS();
     }
 
@@ -79,53 +102,94 @@ class ESPSafeMaster {
     }
 
     void writeData(const char * data) {
-      writeData((uint8_t *)data, strlen(data));
+      writeData((uint8_t *)data, strlen(data), 0);
     }
 };
 
 ESPSafeMaster esp(SS);
 
-void send(const uint8_t * message,size_t len) {
-  Serial.print("Master: ");
- // Serial.println(message);
-  esp.writeData(message, len);
+void send(const uint8_t * message,size_t len, size_t s) {
+ // Serial.print("Master: ");
+ 
+ // Serial.print(len);
+  esp.writeData(message, len, s);
   delay(10);
-  Serial.print("Slave: ");
-  Serial.println(esp.readData());
-  Serial.println();
+// // Serial.print("Slave: ");
+//  Serial.println(esp.readData());
+//  Serial.println();
 }
 
 
 void send(const char * message) {
   Serial.print("Master: ");
-  Serial.println(message);
+ // Serial.println(message);
   esp.writeData(message);
-  delay(10);
-  Serial.print("Slave: ");
-  Serial.println(esp.readData());
-  Serial.println();
+  delay(1);
+//  Serial.print("Slave: ");
+ // Serial.println(esp.readData());
+ // Serial.println();
 }
-     uint8_t arr[32];
+
+void sendSPI2()
+{
+  digitalWrite(SPI2_NSS_PIN, LOW); // manually take CSN low for SPI_2 transmission
+ // for(size_t j =0; j<32; j++){
+      data2[0] = SPI_2.transfer(0x55); //Send the HEX data  0x55 over SPI-2 port and store the received byte to the <data> variable.
+   // }
+  digitalWrite(SPI2_NSS_PIN, HIGH); // manually take CSN high between spi transmissions
+}
+
+
+void sendSPI1()
+{
+  digitalWrite(SPI1_NSS_PIN, LOW); // manually take CSN low for SPI_2 transmission
+ // for(size_t j =0; j<32; j++){
+      data2[0] = SPI_2.transfer(0x55); //Send the HEX data  0x55 over SPI-2 port and store the received byte to the <data> variable.
+   // }
+  digitalWrite(SPI1_NSS_PIN, HIGH); // manually take CSN high between spi transmissions
+}
+
+     uint8_t arr[256];
      uint8_t arr2[32];
 void setup() {
   Serial.begin(115200);
-  for(size_t i=0; i<32; i++){
+  for(size_t i=0; i<256; i++){
     arr[i]=i;
     }
-     for(size_t i=0; i<32; i++){
-    arr2[i]=i+32;
-    }  
+//     for(size_t i=0; i<32; i++){
+//    arr2[i]=i+32;
+//    }  
    //  SPI1C2 |= 1 << SPIC2MISODM_S;
   SPI.begin();
-  SPI_2.begin();
+  SPI.setClockDivider(SPI_CLOCK_DIV4);  // Use a different speed to SPI 1
   esp.begin();
+  SPI_2.begin(); //Initialize the SPI_2 port.
+  SPI_2.setBitOrder(MSBFIRST); // Set the SPI_2 bit order
+  SPI_2.setDataMode(SPI_MODE0); //Set the  SPI_2 data mode 0
+  SPI_2.setClockDivider(SPI_CLOCK_DIV4);  // Use a different speed to SPI 1
+  pinMode(SPI2_NSS_PIN, OUTPUT);
+  pinMode(SPI1_NSS_PIN, OUTPUT);
+
   delay(1000);
-  send("Hello Slave!");
+  //send("Hello Slave!");
 }
-
+size_t j = 0;
 void loop() {
+//  if(cnt<255)
+//  cnt++;
+//  else
+//  cnt=0;
+ // delay(300);
+//  send(arr,32, 32*j);
+//  if(j<7){
+//   j++;}
+ //  else{j =0;}
+   
 
-  delay(300);
-  send(arr, 32);
-  send(arr2, 32);
+ // delay(100);
+  sendSPI2();
+    //delay(100);
+
+  //Serial.println(data2[0]);
+//  send(data2,32);
 }
