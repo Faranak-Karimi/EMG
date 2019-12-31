@@ -11,9 +11,9 @@ from collections import Counter
 
 #path = "E:/courses/Bs. Project/Classification/biopatrec-master/Dataset Features/"
 
-def extract_table(path):
-    x = [loadmat(path + 'user%s-%dth-ft.mat' % (5, 5))]
-    # x = [loadmat('user%s-%dth-ft.mat' % (5, 5))]
+def extract_table():
+    # x = [loadmat(path + 'user%s-%dth-ft.mat' % (5, 5))]
+    x = [loadmat('user%s-%dth-ft.mat' % (5, 5))]
     nch = 2;
     nf = 4;
     nM = 5;
@@ -26,7 +26,8 @@ def extract_table(path):
     for i in range(1, nf + 1):
         for j in range(1, nch + 1):
             cl_names.append('f' + str(i) + 'ch' + str(j))
-    df = pd.DataFrame(columns=range(0, 8))
+    cl_names.append('Category')
+    df = pd.DataFrame(columns=range(0, 9))
 
     k = 0
     target = []
@@ -44,7 +45,7 @@ def extract_table(path):
             k = k + 2;
             df.at[r, [k, k + 1]] = x[0]["sigFeatures"]["trFeatures"][0, 0][:, j]["tslpch2"][i][0]
             k = 0;
-            target.append(j)
+            df.at[r, 8] = j
 
     for j in range(0, nM):
         for i in range(0, ntset):
@@ -57,7 +58,7 @@ def extract_table(path):
             k = k + 2;
             df.at[r, [k, k + 1]] = x[0]["sigFeatures"]["tFeatures"][0, 0][:, j]["tslpch2"][i][0]
             k = 0;
-            target.append(j)
+            df.at[r, 8] = j
 
     for j in range(0, nM):
         for i in range(0, nvset):
@@ -70,8 +71,17 @@ def extract_table(path):
             k = k + 2;
             df.at[r, [k, k + 1]] = x[0]["sigFeatures"]["vFeatures"][0, 0][:, j]["tslpch2"][i][0]
             k = 0;
-            target.append(j)
+            df.at[r, 8] = j
+
+    df.rename(columns = {df.columns[i] : cl_names[i] for i in range(0,9)}, inplace=True)
 
     return df
-# extract_table()
+
+
+data = pd.DataFrame()
+data = extract_table()
+print(data)
+num_cols = data.columns.values
+
+
 
