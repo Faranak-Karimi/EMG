@@ -1,19 +1,14 @@
-from sklearn import datasets
-from sklearn.pipeline import Pipeline
-from sklearn.preprocessing import StandardScaler
-from sklearn.svm import LinearSVC
-import numpy as np
-from scipy.io import loadmat
-import pandas as pd
-from collections import Counter
 
+import numpy as np
+import pandas as pd
+from scipy.io import loadmat
 # .............data Manipulation............ #
 
 #path = "E:/courses/Bs. Project/Classification/biopatrec-master/Dataset Features/"
 
-def extract_table():
+def extract_table(path):
     # x = [loadmat(path + 'user%s-%dth-ft.mat' % (5, 5))]
-    x = [loadmat('user%s-%dth-ft.mat' % (5, 5))]
+    x = [loadmat(path)]
     nch = 2;
     nf = 4;
     nM = 5;
@@ -45,7 +40,7 @@ def extract_table():
             k = k + 2;
             df.at[r, [k, k + 1]] = x[0]["sigFeatures"]["trFeatures"][0, 0][:, j]["tslpch2"][i][0]
             k = 0;
-            df.at[r, 8] = j
+            df.at[r, 8] = int(j)
 
     for j in range(0, nM):
         for i in range(0, ntset):
@@ -58,7 +53,7 @@ def extract_table():
             k = k + 2;
             df.at[r, [k, k + 1]] = x[0]["sigFeatures"]["tFeatures"][0, 0][:, j]["tslpch2"][i][0]
             k = 0;
-            df.at[r, 8] = j
+            df.at[r, 8] = int(j)
 
     for j in range(0, nM):
         for i in range(0, nvset):
@@ -71,17 +66,9 @@ def extract_table():
             k = k + 2;
             df.at[r, [k, k + 1]] = x[0]["sigFeatures"]["vFeatures"][0, 0][:, j]["tslpch2"][i][0]
             k = 0;
-            df.at[r, 8] = j
+            df.at[r, 8] = int(j)
 
     df.rename(columns = {df.columns[i] : cl_names[i] for i in range(0,9)}, inplace=True)
 
     return df
-
-
-data = pd.DataFrame()
-data = extract_table()
-print(data)
-num_cols = data.columns.values
-
-
 
