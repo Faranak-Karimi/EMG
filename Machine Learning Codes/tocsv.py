@@ -8,7 +8,7 @@ import os
 dir =r"C:\Users\Vida\Dropbox\BS Thesis\Datasets\Dataset Features"
 j = 3
 files = []
-# for j in range(1,4)
+# for j in range(1,3):
 for i in range (1,14):
     files.append('user' + str(i) + '-' + str(j) + '-' + 'ft')
     path = (os.path.join(dir , files[i-1] + '.mat'))
