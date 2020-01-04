@@ -22,7 +22,7 @@ def extract_table(path):
         for j in range(1, nch + 1):
             cl_names.append('f' + str(i) + 'ch' + str(j))
     cl_names.append('Category')
-    df = pd.DataFrame(columns=range(0, 9))
+    df = pd.DataFrame(columns=range(0, nf * 2 + 1))
 
     k = 0
     target = []
@@ -36,11 +36,12 @@ def extract_table(path):
             k= k + 2;
             df.at[r, [k, k + 1]] = x[0]["sigFeatures"]["trFeatures"][0, 0][:, j]["twl"][i][0]
             k = k + 2;
+            # df.at[r, [k, k + 1]] = x[0]["sigFeatures"]["trFeatures"][0, 0][:, j]["trms"][i][0]
             df.at[r, [k, k + 1]] = x[0]["sigFeatures"]["trFeatures"][0, 0][:, j]["tzc"][i][0]
             k = k + 2;
             df.at[r, [k, k + 1]] = x[0]["sigFeatures"]["trFeatures"][0, 0][:, j]["tslpch2"][i][0]
             k = 0;
-            df.at[r, 8] = int(j)
+            df.at[r, nf * 2 ] = int(j)
 
     for j in range(0, nM):
         for i in range(0, ntset):
@@ -49,11 +50,12 @@ def extract_table(path):
             k = k + 2;
             df.at[r, [k, k + 1]] = x[0]["sigFeatures"]["tFeatures"][0, 0][:, j]["twl"][i][0]
             k = k + 2;
-            df.at[r, [k, k + 1]] = x[0]["sigFeatures"]["tFeatures"][0, 0][:, j]["tzc"][i][0]
+            # df.at[r, [k, k + 1]] = x[0]["sigFeatures"]["tFeatures"][0, 0][:, j]["trms"][i][0]
+            df.at[r, [k, k + 1]] = x[0]["sigFeatures"]["trFeatures"][0, 0][:, j]["tzc"][i][0]
             k = k + 2;
             df.at[r, [k, k + 1]] = x[0]["sigFeatures"]["tFeatures"][0, 0][:, j]["tslpch2"][i][0]
             k = 0;
-            df.at[r, 8] = int(j)
+            df.at[r, nf * 2 ] = int(j)
 
     for j in range(0, nM):
         for i in range(0, nvset):
@@ -62,13 +64,14 @@ def extract_table(path):
             k = k + 2;
             df.at[r, [k, k + 1]] = x[0]["sigFeatures"]["vFeatures"][0, 0][:, j]["twl"][i][0]
             k = k + 2;
-            df.at[r, [k, k + 1]] = x[0]["sigFeatures"]["vFeatures"][0, 0][:, j]["tzc"][i][0]
+            # df.at[r, [k, k + 1]] = x[0]["sigFeatures"]["vFeatures"][0, 0][:, j]["trms"][i][0]
+            df.at[r, [k, k + 1]] = x[0]["sigFeatures"]["trFeatures"][0, 0][:, j]["tzc"][i][0]
             k = k + 2;
             df.at[r, [k, k + 1]] = x[0]["sigFeatures"]["vFeatures"][0, 0][:, j]["tslpch2"][i][0]
             k = 0;
-            df.at[r, 8] = int(j)
+            df.at[r, nf * 2] = int(j)
 
-    df.rename(columns = {df.columns[i] : cl_names[i] for i in range(0,9)}, inplace=True)
+    df.rename(columns = {df.columns[i] : cl_names[i] for i in range(0,nf * 2 + 1)}, inplace=True)
 
     return df
 
