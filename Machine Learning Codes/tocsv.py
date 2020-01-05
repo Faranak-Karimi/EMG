@@ -16,8 +16,8 @@ files = []
 #     df.to_csv(files[i-1] + '.csv', index=False)
 
 #dry
-for j in range(3,8):
-    files.append('user' + str(1) + '-' + str(j) + '-' + 'dryft')
-    path = (os.path.join(dir , files[j-3] + '.mat'))
+for j in range(1,8):
+    files.append('user' + str(2) + '-' + str(j) + '-' + 'dryft')
+    path = (os.path.join(dir , files[j-2] + '.mat'))
     df = t.extract_table(path)
-    df.to_csv(files[j - 3] + '.csv', index=False)
+    df.to_csv(files[j - 2] + '.csv', index=False)
