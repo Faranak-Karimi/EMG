@@ -51,7 +51,7 @@ def extract_table(path):
             df.at[r, [k, k + 1]] = x[0]["sigFeatures"]["tFeatures"][0, 0][:, j]["twl"][i][0]
             k = k + 2;
             # df.at[r, [k, k + 1]] = x[0]["sigFeatures"]["tFeatures"][0, 0][:, j]["trms"][i][0]
-            df.at[r, [k, k + 1]] = x[0]["sigFeatures"]["trFeatures"][0, 0][:, j]["tzc"][i][0]
+            df.at[r, [k, k + 1]] = x[0]["sigFeatures"]["tFeatures"][0, 0][:, j]["tzc"][i][0]
             k = k + 2;
             df.at[r, [k, k + 1]] = x[0]["sigFeatures"]["tFeatures"][0, 0][:, j]["tslpch2"][i][0]
             k = 0;
