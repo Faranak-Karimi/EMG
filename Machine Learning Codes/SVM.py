@@ -24,6 +24,7 @@ li_test = []
 # j = 1
 # for i in range(1, 13):
 for j in range(3, 8):
+    # if j in [3,5,7]:
     # files.append('user' + str(i) + '-' + str(j) + '-' + 'ft' + '.csv')
 
     file = 'user' + str(1) + '-' + str(j) + '-' + 'dryft'+'.csv'
