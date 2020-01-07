@@ -68,37 +68,45 @@ for j in range(1, 4):
 #     print('user %s _ %f wet : %d '% (l, 3, accuracy*100))
 for j in range(1, 8):
     for i in range(3, 4):
-        file = 'user' + str(i) + '-' + str(j) + '-' + 'dryft'+'.csv'
-        # data = data.sample(frac=1).reset_index(drop=True)
-        data = pd.read_csv(os.path.join('Dry Dataset', file))
-        if j < 5:
+        if j != 3:
+            file = 'user' + str(i) + '-' + str(j) + '-' + 'dryft'+'.csv'
+            # data = data.sample(frac=1).reset_index(drop=True)
+            data = pd.read_csv(os.path.join('Dry Dataset', file))
             li_test.append(data)
-        else:
-            li_train.append(data)
-        # if(j == 1):
-            # file = 'user' + str(1) + '-' + str(3) + '-' + 'dryft' + '.csv'
-            # data = pd.read_csv(os.path.join(file))
-            # li_test.append(data)
-            # file = 'user' + str(2) + '-' + str(3) + '-' + 'dryft' + '.csv'
-            # data = pd.read_csv(os.path.join(file))
-            # li_test.append(data)
 
-        # .............data Manipulation............ #
-        X = data.loc[:, 'f1ch1': 'f2ch2']
-        y = (data.loc[:, 'Category']).astype(np.float64)
-        X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=38, test_size=0.25)
-        # svm_clf = Pipeline([("scaler", StandardScaler()), ("linear_svc", LinearSVC(loss="hinge")), ])
-        svm_linear = svm_clf.fit(X_train, y_train)
-        y_pred = svm_linear.predict(X_test)
-        accuracy = svm_linear.score(X_test, y_test)
+            if(j == 1):
+                file = 'user' + str(1) + '-' + str(3) + '-' + 'dryft' + '.csv'
+                data = pd.read_csv(os.path.join(file))
+                li_test.append(data)
+                file = 'user' + str(2) + '-' + str(7) + '-' + 'dryft' + '.csv'
+                data = pd.read_csv(os.path.join('Dry Dataset', file))
+                li_test.append(data)
+            # .............data Manipulation............ #
+            X = data.loc[:, 'f1ch1': 'f2ch2']
+            y = (data.loc[:, 'Category']).astype(np.float64)
+            X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=38, test_size=0.25)
+            # svm_clf = Pipeline([("scaler", StandardScaler()), ("linear_svc", LinearSVC(loss="hinge")), ])
+            svm_linear = svm_clf.fit(X_train, y_train)
+            y_pred = svm_linear.predict(X_test)
+            accuracy = svm_linear.score(X_test, y_test)
 
-        # cm = confusion_matrix(y_test, svm_predictions)
-        print('user%g_ %s dry: %d ' % (i, j, accuracy*100))
-        svm_predictions = svm_linear.predict(X_test)
-        cm = confusion_matrix(y_test, svm_predictions)
-        cm = cm.astype('float') / cm.sum(axis=1)[:, np.newaxis]
-        cm_d = cm.diagonal() * 100
-        print(cm_d)
+            # cm = confusion_matrix(y_test, svm_predictions)
+            print('user%g_ %s dry: %d ' % (i, j, accuracy*100))
+            svm_predictions = svm_linear.predict(X_test)
+            cm = confusion_matrix(y_test, svm_predictions)
+            cm = cm.astype('float') / cm.sum(axis=1)[:, np.newaxis]
+            cm_d = cm.diagonal() * 100
+            print(cm_d)
+
+# file = 'user' + str(1) + '-' + str(1) + '-' + 'dryft'+'.csv'
+# # data = data.sample(frac=1).reset_index(drop=True)
+# data = pd.read_csv(os.path.join('Dry Dataset', file))
+# li_test.append(data)
+#
+# file = 'user' + str(1) + '-' + str(3) + '-' + 'dryft'+'.csv'
+# # data = data.sample(frac=1).reset_index(drop=True)
+# data = pd.read_csv(os.path.join(file))
+# li_test.append(data)
 
     # randomizing DataFarme rows
 # data = data.sample(frac=1).reset_index(drop=True)
@@ -126,8 +134,8 @@ for j in range(1, 8):
 # li_test = random.shuffle(li_test)
 # li_train = random.shuffle(li_train)
 # X_data = pd.concat(li_train + li_test, axis=0, ignore_index=True).loc[:, 'f1ch1': 'f4ch2']
-X_test_data = pd.concat(li_test, axis=0, ignore_index=True).loc[:, 'f1ch1': 'f2ch2']
-X_train_data = pd.concat(li_train, axis=0, ignore_index=True).loc[:, 'f1ch1': 'f2ch2']
+X_test_data = pd.concat(li_test, axis=0, ignore_index=True).loc[:, 'f1ch1': 'f4ch2']
+X_train_data = pd.concat(li_train, axis=0, ignore_index=True).loc[:, 'f1ch1': 'f4ch2']
 # y_data = (pd.concat(li_train + li_test, axis=0, ignore_index=True).loc[:, 'Category']).astype(np.float64)
 y_test_data = (pd.concat(li_test, axis=0, ignore_index=True).loc[:, 'Category']).astype(np.float64)
 y_train_data = (pd.concat(li_train, axis=0, ignore_index=True).loc[:, 'Category']).astype(np.float64)
