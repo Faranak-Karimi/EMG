@@ -36,15 +36,15 @@ def split_channels(ss):
     data6 = (int(twos_comp(int(ss[18] * 65536 + ss[19] * 256 + ss[20]), 24)) / 3355443)
     data7 = (int(twos_comp(int(ss[21] * 65536 + ss[22] * 256 + ss[23]), 24)) / 3355443)
     data8 = (int(twos_comp(int(ss[24] * 65536 + ss[25] * 256 + ss[26]), 24)) / 3355443)
-    data_t = [data1, data2, data3, data4, data5, data6, data7, data8]
+    # data_t = [data1, data2, data3, data4, data5, data6, data7, data8]
     f.write("ch 1: '{:.6f}' \t ch 2: '{:.6f}' \t ch 3: '{:.6f}'"
                  " \t ch 4: '{:.6f}' \t ch 5: '{:.6f}' \t ch 6: '{:.6f}'"
                  " \t ch 7: '{:.6f}' \t ch 8: '{:.6f}'\n"
                  .format(data1,
                          data2, data3, data4, data5,
                          data6, data7, data8))  # perf_counter() - self.start_time,
-    df = pd.DataFrame(data, columns=['ch1', 'ch2', 'ch3', 'ch4', 'ch5', 'ch6', 'ch7', 'ch8'])
-
+    # df = pd.DataFrame(data, columns=['ch1', 'ch2', 'ch3', 'ch4', 'ch5', 'ch6', 'ch7', 'ch8'])
+i = 0
 while True:
     if data_ != b'G':
         t1 = time.time()
@@ -53,23 +53,27 @@ while True:
         data_ = s.recv(1)
         print("read ")
     else:
+        i = i+1
         data = s.recv(27)
         check = data.find(0x48)
-        # print(check)
-        data = shift(data, check)
-        # print(data)
-        split_channels(data)
+        check2 = data.count(0x48)
+        check3 = data.count(0x49)
+        check4 = data.count(0x50)
+        print(i)
+        if check >= 0 and check2*check3*check4 == 1:
+            data = shift(data, check)
+            split_channels(data)
+            print(data)
         #     print("checked...")
         #     # ss = s.recv(24)
 
-        if time.time() - t1 > 6:
+        if time.time() - t1 > 10:
             print("it's beent a long time")
-            s.sendall(b'G')
+            # s.sendall(b'G')
             break
 
         # host.write(b'G')
     # print('Received', repr(ss))
 s.close()
 f.close()
-print(df)
 print("connection is closed.....")
